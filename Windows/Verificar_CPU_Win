@@ -1,0 +1,17 @@
+---
+- name: Verificar uso de CPU en Windows
+  hosts: all
+  gather_facts: no
+
+  tasks:
+
+    - name: Obtener porcentaje de CPU
+      win_shell: |
+        Get-Counter '\Processor(_Total)\% Processor Time' |
+        Select -ExpandProperty CounterSamples |
+        Select -ExpandProperty CookedValue
+      register: cpu_output
+
+    - name: Mostrar resultado
+      debug:
+        msg: "CPU actual: {{ cpu_output.stdout | trim }} %"
