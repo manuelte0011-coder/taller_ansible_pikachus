@@ -12,6 +12,6 @@
         Select -ExpandProperty CookedValue
       register: cpu_output
 
-    - name: Mostrar resultado
+    - name: Mostrar resultado.
       debug:
         msg: "CPU actual: {{ cpu_output.stdout | trim }} %"
